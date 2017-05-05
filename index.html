@@ -2,19 +2,28 @@
 <html>
 <head>
     <title>David's GitHub Page</title>
-    <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
-    <script src="//ajax.aspnetcdn.com/ajax/knockout/knockout-3.4.2.js"></script>
-	<script src="rolltable.js"></script>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo="><!--placeholder favicon-->
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/knockout/knockout-3.4.2.js"></script>
+    <script type="text/javascript" src="rolltable.js"></script>
 </head>
 <body>
     <h1>Rollable Tables</h1>
     <p>Rollable Tables are used to generate random things in role playing games. This project allows the user to maintain their own rollable table on Google Sheets, and use them on GitHub Pages.</p>
 
-	<div id="results"></div>
-	
-    <script type="text/javascript">
-RollTable.loadData();
-    </script>
+    <div id="nav">
+        <ul data-bind="foreach: groupNames">
+            <li><a href="#" data-bind="text: groupName, click: $parent.groupNameClickHandler(groupName)"></a></li>
+        </ul>
+    </div>
 
+    <h2 data-bind="text: selectedGroupName"></h2>
+    <p data-bind="text: displayText"></p>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            RollTable.load();
+        });
+    </script>
 </body>
 </html>
