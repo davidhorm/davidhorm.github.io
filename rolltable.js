@@ -32,7 +32,6 @@ var RollTable = RollTable || {
             var rows = data.feed.entry;
             RollTable.loadTableNames(rows[0]);
             RollTable.loadTableData(rows);
-            //console.log(RollTable.tableData);
         });
     },
 
@@ -70,9 +69,9 @@ var RollTable = RollTable || {
 
             case RollTable.GROUP_NAMES.TAVERN:
                 var newDisplayText = String.format('{0} {1}, {2}',
-                    RollTable.getItem('tavernname1'),
-                    RollTable.getItem('tavernname2'),
-                    RollTable.getItem('tavernenvironment'));
+                    RollTable.getItem('tavern-name-1'),
+                    RollTable.getItem('tavern-name-2'),
+                    RollTable.getItem('tavern-environment'));
                 RollTable.ViewModel.displayText(newDisplayText);
                 break;
 
