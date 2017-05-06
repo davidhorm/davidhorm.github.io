@@ -13,6 +13,7 @@ var RollTable = RollTable || {
     gsIdentifier: 'gsx$',
     tableNames: [],
     tableData: {},
+    isDataLoaded: false,
 
     GROUP_NAMES: {
         TAVERN: "Tavern",
@@ -32,6 +33,7 @@ var RollTable = RollTable || {
             var rows = data.feed.entry;
             RollTable.loadTableNames(rows[0]);
             RollTable.loadTableData(rows);
+            RollTable.isDataLoaded = true;
         });
     },
 
@@ -65,22 +67,26 @@ var RollTable = RollTable || {
     },
 
     updateDisplayText: function () {
-        switch (RollTable.ViewModel.selectedGroupName()) {
+        if (RollTable.isDataLoaded) {
+            switch (RollTable.ViewModel.selectedGroupName()) {
 
-            case RollTable.GROUP_NAMES.TAVERN:
-                var newDisplayText = String.format('{0} {1}, {2}',
-                    RollTable.getItem('tavern-name-1'),
-                    RollTable.getItem('tavern-name-2'),
-                    RollTable.getItem('tavern-environment'));
-                RollTable.ViewModel.displayText(newDisplayText);
-                break;
+                case RollTable.GROUP_NAMES.TAVERN:
+                    var newDisplayText = String.format('{0} {1}, {2}',
+                                            RollTable.getItem('tavern-name-1'),
+                                            RollTable.getItem('tavern-name-2'),
+                                            RollTable.getItem('tavern-environment')
+                                         );
+                    RollTable.ViewModel.displayText(newDisplayText);
+                    break;
 
-            case RollTable.GROUP_NAMES.NPC:
-                RollTable.ViewModel.displayText('hello my name is david');
-                break;
+                case RollTable.GROUP_NAMES.NPC:
+                    var newDisplayText = RollTable.getItem('arctic-random');
+                    RollTable.ViewModel.displayText(newDisplayText);
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
+            }
         }
     },
 
@@ -89,10 +95,29 @@ var RollTable = RollTable || {
 
         if (typeof (table) !== 'undefined') {
             var randomIndex = Math.floor((Math.random() * table.length));
-            return table[randomIndex];
+            var initialText = table[randomIndex].replace(/\n/g, '<br />'); //globally replace all '\n' characters with <br />
+            return RollTable.getRecursiveText(initialText);
         }
         else {
             return '';
+        }
+    },
+
+    getRecursiveText: function (initialText) {
+        var firstBracket = initialText.indexOf('{');
+        var lastBracket = initialText.indexOf('}');
+        if (firstBracket >= 0 && lastBracket > firstBracket) {
+            var recursiveTableName = initialText.substring(firstBracket + 1, lastBracket);
+            var newItem = RollTable.getItem(recursiveTableName);
+
+            if (newItem === '') { return initialText; } //couldn't find table
+
+            var replaceKey = new RegExp('{' + recursiveTableName + '}', 'g');
+            var newText = initialText.replace(replaceKey, newItem);//globally replace all '{tableName}' with the new rolled item
+            return RollTable.getRecursiveText(newText);
+        }
+        else {
+            return initialText;
         }
     }
 };
