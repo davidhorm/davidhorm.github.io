@@ -80,7 +80,7 @@ var RollTable = RollTable || {
                     break;
 
                 case RollTable.GROUP_NAMES.NPC:
-                    var newDisplayText = RollTable.getItem('arctic-random');
+                    var newDisplayText = RollTable.getItem('any-name');
                     RollTable.ViewModel.displayText(newDisplayText);
                     break;
 
@@ -90,10 +90,20 @@ var RollTable = RollTable || {
         }
     },
 
+	/*
+	This function will return a random item from table with the specified tableName. 
+	Multiple tableNames may be spcified with a pipe character ('|'). This method will combine the tables, and return a single item.
+	*/
     getItem: function (tableName) {
-        var table = RollTable.tableData[tableName];
+        
+		var table = [];
+		var tableNameArray = tableName.split('|');
+		for(var i = 0; i < tableNameArray.length; i++){
+			var name = tableNameArray[i];
+			table = table.concat(RollTable.tableData[name]);
+		}
 
-        if (typeof (table) !== 'undefined') {
+        if (typeof (table) !== 'undefined' && table.length > 0) {
             var randomIndex = Math.floor((Math.random() * table.length));
             var initialText = table[randomIndex].replace(/\n/g, '<br />'); //globally replace all '\n' characters with <br />
             return RollTable.getRecursiveText(initialText);
@@ -112,7 +122,7 @@ var RollTable = RollTable || {
 
             if (newItem === '') { return initialText; } //couldn't find table
 
-            var replaceKey = new RegExp('{' + recursiveTableName + '}', 'g');
+            var replaceKey = new RegExp('{' + recursiveTableName.replace(/\|/g, '\\|') + '}', 'g'); //escape pipes for regex 
             var newText = initialText.replace(replaceKey, newItem);//globally replace all '{tableName}' with the new rolled item
             return RollTable.getRecursiveText(newText);
         }
