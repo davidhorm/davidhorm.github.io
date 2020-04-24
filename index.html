@@ -1,29 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>David's GitHub Page</title>
+    <title>David Horm's GitHub Pages</title>
     <link rel="icon" href="data:;base64,iVBORw0KGgo="><!--placeholder favicon-->
-    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/knockout/knockout-3.4.2.js"></script>
-    <script type="text/javascript" src="rolltable.js"></script>
 </head>
 <body>
-    <h1>Rollable Tables</h1>
-    <p>Rollable Tables are used to generate random things in role playing games. This project allows the user to maintain their own rollable table on Google Sheets, and use them on GitHub Pages.</p>
-
-    <div id="nav">
-        <ul data-bind="foreach: groupNames">
-            <li><a href="#" data-bind="text: groupName, click: $parent.groupNameClickHandler(groupName)"></a></li>
+    <h1>David Horm's GitHub Pages</h1>
+    <main>
+        I like to make things. Here are all the things I made:
+    </main>
+    <nav>
+        <ul>
+            <li><a href="https://davidhorm.github.io/xwing-dividers/">https://davidhorm.github.io/xwing-dividers/</a> - Generate divider boxes to hold X-Wing Miniature Game pilot and upgrade cards</li>
+            <li><a href="https://davidhorm.github.io/xwing-datatables/">https://davidhorm.github.io/xwing-datatables/</a> - Displaying the data found in xwing-data in datatables for searching and filtering</li>
+            <li>https://github.com/davidhorm/cookbook - Display and scale ingredient amounts directly in recipe. (not live yet)</li>
+            <li><a href="https://davidhorm.github.io/wavelength/">https://davidhorm.github.io/wavelength/</a> - Play Wavelength party game on web conference.</li>
         </ul>
-    </div>
-
-    <h2 data-bind="text: selectedGroupName"></h2>
-    <p data-bind="html: displayText"></p>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            RollTable.load();
-        });
-    </script>
+    </nav>
 </body>
 </html>
