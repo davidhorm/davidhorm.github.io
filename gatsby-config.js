@@ -1,10 +1,10 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `David Horm's Thoughts and Notes`,
+    description: `David Horm's personal homepage is where he collects his random thoughts and notes, zettelkasten style.`,
+    author: `David Horm`,
     twitter: 'davidhorm',
-    siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
+    siteUrl: `https://davidhorm.github.io/`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -41,6 +41,7 @@ module.exports = {
       resolve: `gatsby-theme-networked-thought`,
       options: {
         thoughtsDirectory: `content/`,
+        rootThought: `index`,
       }
     },
   ],
