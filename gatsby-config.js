@@ -41,7 +41,7 @@ module.exports = {
       resolve: `gatsby-theme-networked-thought`,
       options: {
         thoughtsDirectory: `content/`,
-        rootThought: `index`,
+        rootThought: `home`,
       }
     },
   ],
