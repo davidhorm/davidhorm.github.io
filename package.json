@@ -1,0 +1,60 @@
+{
+  "name": "davidhorm.github.io",
+  "private": true,
+  "description": "David Horm's Thoughts and Notes",
+  "version": "0.1.0",
+  "author": {
+    "name": "David Horm",
+    "email": "davidhorm@gmail.com"
+  },
+  "homepage": "https://davidhorm.github.io/",
+  "dependencies": {
+    "gatsby": "^4.1.3",
+    "gatsby-plugin-gatsby-cloud": "^4.1.1",
+    "gatsby-plugin-image": "^2.1.1",
+    "gatsby-plugin-manifest": "^4.1.2",
+    "gatsby-plugin-offline": "^5.1.2",
+    "gatsby-plugin-react-helmet": "^5.1.0",
+    "gatsby-plugin-sharp": "^4.1.2",
+    "gatsby-remark-images": "^6.1.2",
+    "gatsby-source-filesystem": "^4.1.1",
+    "gatsby-theme-networked-thought": "^0.4.2",
+    "gatsby-transformer-sharp": "^4.1.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0"
+  },
+  "devDependencies": {
+    "@types/react-helmet": "^6.1.4",
+    "gh-pages": "^3.2.3",
+    "prettier": "^2.4.1",
+    "typescript": "^4.4.4"
+  },
+  "keywords": [
+    "react",
+    "gatsby",
+    "zettelkasten",
+    "digital garden",
+    "evergreen notes",
+    "networked thoughts",
+    "knowledge graph"
+  ],
+  "license": "0BSD",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "start": "gatsby develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "deploy": "gatsby clean && gatsby build && gh-pages -d public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidhorm/davidhorm.github.io"
+  },
+  "bugs": {
+    "url": "https://github.com/davidhorm/davidhorm.github.io/issues"
+  }
+}
