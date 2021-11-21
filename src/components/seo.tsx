@@ -5,15 +5,14 @@
  * See: https://www.gatsbyjs.com/docs/use-static-query/
  */
 
-import * as React from "react"
-import { Helmet } from "react-helmet"
-import type { HelmetProps } from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
+import { Helmet } from "react-helmet";
+import type { HelmetProps } from "react-helmet";
+import { useStaticQuery, graphql } from "gatsby";
 
 interface SeoProps extends Pick<HelmetProps, "meta"> {
-  description?: string
-  lang?: string
-  title: string
+  description?: string;
+  lang?: string;
+  title: string;
 }
 
 export const Seo = ({
@@ -33,11 +32,11 @@ export const Seo = ({
           }
         }
       }
-    `
-  )
+    `,
+  );
 
-  const metaDescription = description || site.siteMetadata.description
-  const defaultTitle = site.siteMetadata?.title
+  const metaDescription = description || site.siteMetadata.description;
+  const defaultTitle = site.siteMetadata?.title;
 
   const defaultMeta: typeof meta = [
     {
@@ -72,7 +71,7 @@ export const Seo = ({
       name: `twitter:description`,
       content: metaDescription,
     },
-  ]
+  ];
 
   return (
     <Helmet
@@ -81,5 +80,5 @@ export const Seo = ({
       titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : undefined}
       meta={defaultMeta.concat(meta)}
     />
-  )
-}
+  );
+};

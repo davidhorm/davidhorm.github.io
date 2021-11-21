@@ -1,3 +1,3 @@
-export { Header } from "./header"
-export { Layout } from "./layout"
-export { Seo } from "./seo"
+export { Header } from "./header";
+export { Layout } from "./layout";
+export { Seo } from "./seo";
