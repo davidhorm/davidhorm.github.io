@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, GatsbyImageProps } from "gatsby-plugin-image";
 import { pick, pickBy, identity } from "lodash";
 import { jsx } from "theme-ui";
-import OriginalMdxComponents from "../../../../../../node_modules/gatsby-theme-networked-thought/src/components/mdx-components";
+import OriginalMdxComponents from "gatsby-theme-networked-thought/src/components/mdx-components";
 
 type ImageProps = { src: string } & Omit<GatsbyImageProps, "image">;
 
