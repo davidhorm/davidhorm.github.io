@@ -1,18 +1,57 @@
 /** @jsx jsx */
-import { graphql, useStaticQuery } from "gatsby";
+import { Link, graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, GatsbyImageProps } from "gatsby-plugin-image";
 import { pick, pickBy, identity } from "lodash";
-import { jsx } from "theme-ui";
-import OriginalMdxComponents from "gatsby-theme-networked-thought/src/components/mdx-components";
+import { useWindowSize } from "react-use";
+import { Styled, jsx, useColorMode } from "theme-ui";
+import Tippy, { TipContentWrapper } from "gatsby-theme-networked-thought/src/components/tippy";
+
+/**
+ * Shadowing `gatsby-theme-networked-thought/src/components/mdx-components.tsx` because:
+ * 1. null `childImageSharp` warnings on all files during `yarn build`.
+ * 2. Replace `<LinkToStacked>` with regular `<Link>`
+ */
+
+export type AnchorTagProps = {
+  href: string;
+  to?: string;
+  previews?: { [key: string]: React.ReactNode };
+};
+
+const AnchorTag = ({ href, previews, ...restProps }: AnchorTagProps) => {
+  const [colorMode] = useColorMode();
+  const { width } = useWindowSize();
+  const stacked = width >= 768;
+  if (!href) {
+    href = restProps.to as string;
+  }
+
+  const previewsMapping = previews || {};
+
+  if (!href.match(/^http/)) {
+    if (stacked) {
+      return (
+        <Tippy content={previewsMapping[href.replace(/^\//, "")]}>
+          <Link {...restProps} to={href} sx={{ variant: "links.internal" }} />
+        </Tippy>
+      );
+    }
+    return <Link {...restProps} to={href} sx={{ variant: "links.internal" }} />;
+  }
+
+  const externalVariant = `links.external-${colorMode}`;
+  const tipContent = <TipContentWrapper>{href}</TipContentWrapper>;
+
+  return (
+    <Tippy content={tipContent} placement="top">
+      <Styled.a {...restProps} href={href} sx={{ variant: externalVariant }} />
+    </Tippy>
+  );
+}
 
 type ImageProps = { src: string } & Omit<GatsbyImageProps, "image">;
 
-/**
- * Shadowing `/node_modules/gatsby-theme-networked-thought/src/components/mdx-components.tsx`
- * because of null `childImageSharp` warnings on all files during `yarn build`.
- */
-
-function Image(props: ImageProps) {
+const Image = (props: ImageProps) => {
   const { src, alt, ...rest } = props;
   const data = useStaticQuery(graphql`
     query ImageComponent_v2 {
@@ -33,9 +72,7 @@ function Image(props: ImageProps) {
     return <img src={src} {...pickBy(imageProps, identity)} />;
   }
 
-  const image = data.images.nodes.find(({ relativePath }: { relativePath: string }) => {
-    return relativePath.includes(src);
-  });
+  const image = data.images.nodes.find(({ relativePath }: { relativePath: string }) => relativePath.includes(src));
   if (!image || !image.childImageSharp) {
     return null;
   }
@@ -44,6 +81,6 @@ function Image(props: ImageProps) {
 }
 
 export default {
-  a: OriginalMdxComponents.a,
+  a: AnchorTag,
   img: Image,
 };
