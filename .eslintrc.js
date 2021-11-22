@@ -32,14 +32,18 @@ module.exports = {
     "rules": {
         // Turning off because I don't use PropTypes
         // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/require-default-props.md
-        "react/require-default-props": 0,
+        "react/require-default-props": "off",
 
         // Prefer arrow functions
         // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/function-component-definition.md
-        "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
+        "react/function-component-definition": ["error", { "namedComponents": "arrow-function" }],
+
+        // Prefer the convenience of spreading of the safety of not.
+        // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-props-no-spreading.md
+        "react/jsx-props-no-spreading": "off",
 
         // Prefer to export named components from an index file
         // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/prefer-default-export.md
-        "import/prefer-default-export": 0,
+        "import/prefer-default-export": "off",
     }
 };

@@ -1,16 +1,17 @@
-/** @jsx jsx */
-import { Link, graphql, useStaticQuery } from "gatsby";
-import { GatsbyImage, GatsbyImageProps } from "gatsby-plugin-image";
-import { pick, pickBy, identity } from "lodash";
-import { useWindowSize } from "react-use";
-import { Styled, jsx, useColorMode } from "theme-ui";
-import Tippy, { TipContentWrapper } from "gatsby-theme-networked-thought/src/components/tippy";
-
 /**
  * Shadowing `gatsby-theme-networked-thought/src/components/mdx-components.tsx` because:
  * 1. null `childImageSharp` warnings on all files during `yarn build`.
  * 2. Replace `<LinkToStacked>` with regular `<Link>`
  */
+
+/** @jsx jsx */
+import { Link, graphql, useStaticQuery } from "gatsby";
+import { GatsbyImage, GatsbyImageProps } from "gatsby-plugin-image";
+import { pick, pickBy, identity } from "lodash";
+import { useWindowSize } from "react-use";
+/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
+import { Styled, jsx, useColorMode } from "theme-ui";
+import Tippy, { TipContentWrapper } from "gatsby-theme-networked-thought/src/components/tippy";
 
 export type AnchorTagProps = {
   href: string;
@@ -23,6 +24,7 @@ const AnchorTag = ({ href, previews, ...restProps }: AnchorTagProps) => {
   const { width } = useWindowSize();
   const stacked = width >= 768;
   if (!href) {
+    /* eslint-disable-next-line no-param-reassign */
     href = restProps.to as string;
   }
 
@@ -69,6 +71,7 @@ const Image = (props: ImageProps) => {
 
   if (src.match(/^http/)) {
     const imageProps = pick(rest, ["title", "alt", "className", "style"]);
+    /* eslint-disable-next-line jsx-a11y/alt-text */
     return <img src={src} {...pickBy(imageProps, identity)} />;
   }
 
