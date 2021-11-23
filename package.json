@@ -41,6 +41,8 @@
     "typescript": "^4.4.4"
   },
   "peerDependencies": {
+    "@mdx-js/react": "*",
+    "gatsby-plugin-mdx": "*",
     "lodash": "*",
     "react-use": "*",
     "theme-ui": "*"
